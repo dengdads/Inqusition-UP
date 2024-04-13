@@ -1,0 +1,115 @@
+﻿@page "/overview"
+@using Blazored.LocalStorage
+@inject HttpClient Http
+@inject ILocalStorageService localStorage
+<MContainer>
+    <MRow>
+        <MCol>
+            <MImage Src="/img/vector_landscape_2.svg" Class="align-center">
+            </MImage>
+        </MCol>
+    </MRow>
+    <MRow>
+        <MCol>
+            <div class="mx-auto" style="max-width: 500px;max-height: 750px">
+                <MContainer Class="grey lighten-5 mb-6">
+                    <MRow>
+                        <MCol>
+                            <MCard Class="ml-md-4" MinHeight="200" Elevation="3">
+                                <MCardTitle>
+                                    <div class="mx-auto">
+                                        <MIcon>
+                                            mdi-brain
+                                        </MIcon>
+                                        <span class="text-h6 font-weight-light">理智</span>
+                                    </div>
+                                </MCardTitle>
+
+                                <MCardText Class="text-h5 font-weight-bold" Style="height:95px">
+                                    <p class="text-center text--primary">
+                                        @san
+                                    </p>
+                                </MCardText>
+                                <MCardActions>
+                                    <MButton Class="mx-auto rounded-2 text-btn white--text" MinHeight="30" MinWidth="60" Color="primary" @onclick="GetUserSan">理智</MButton>
+                                </MCardActions>
+                            </MCard>
+                        </MCol>
+                        <MCol>
+                            <MCard Class="mr-md-4" MinHeight="200" Elevation="3">
+                                <MCardTitle>
+                                    <div class="mx-auto">
+                                        <MIcon>
+                                            mdi-gamepad-variant-outline
+                                        </MIcon>
+                                        <span class="text-h6 font-weight-light">状态</span>
+                                    </div>
+                                </MCardTitle>
+                                <MCardText Class="text-body-1 font-weight-bold" Style="height:95px">
+                                    <p class="text-center text--primary">
+                                        @status
+                                    </p>
+                                </MCardText>
+                                <MCardActions>
+                                    <MButton Class="mx-auto rounded-2 text-btn white--text" MinHeight="30" MinWidth="60" Color="#E53935" @onclick="FreezeUserAccount">冻结账号</MButton>
+                                    <MButton Class="mx-auto rounded-2 text-btn white--text" MinHeight="30" MinWidth="60" Color="primary" @onclick="UnfreezeUserAccount">解冻账号</MButton>
+                                </MCardActions>
+                            </MCard>
+                        </MCol>
+                    </MRow>
+
+                    <MSpacer></MSpacer>
+
+                    <MRow>
+                        <MCol>
+                            <MCard Class="ml-md-4" MinHeight="200" MaxHeight="350" MaxWidth="250" Elevation="3">
+                                <MCardTitle>
+                                    <div class="mx-auto">
+                                        <MIcon>
+                                            mdi-sword-cross
+                                        </MIcon>
+                                        <span class="text-h6 font-weight-light">刷新次数</span>
+                                    </div>
+                                </MCardTitle>
+
+                                <MCardText Class="text-h5 font-weight-bold" Style="height:95px">
+                                    <p class="text-center text--primary">
+                                        @refresh
+                                    </p>
+                                </MCardText>
+                                <MCardActions>
+                                    <MButton Class="mx-auto rounded-2 text-btn white--text" MinHeight="30" MinWidth="60" Color="primary" @onclick="UserStartNow">开始作战</MButton>
+                                    <MButton Class="mx-auto rounded-2 text-btn white--text" MinHeight="30" MinWidth="60" Color="primary" @onclick="UserForceHalt">停止作战</MButton>
+                                </MCardActions>
+                            </MCard>
+                        </MCol>
+                        <MCol>
+                            <MCard Class="mr-md-4" MinHeight="200" MaxHeight="350" MaxWidth="250" Elevation="3">
+                                <MCardTitle>
+                                    <div class="mx-auto">
+                                        <MIcon>
+                                            mdi-update
+                                        </MIcon>
+                                        <span class="6 font-weight-light">有效期</span>
+                                    </div>
+                                </MCardTitle>
+
+                                <MCardText Class="text-body-2 font-weight-bold" Style="height:95px">
+                                    <p class="text-center text--primary">
+                                        @expireTime
+                                    </p>
+                                </MCardText>
+                                <MCardActions>
+                                    <MButton Class="mx-auto rounded-2 text-btn white--text" MinHeight="30" MinWidth="60" Color="primary" @onclick="GetUserAccount">有效期</MButton>
+                                </MCardActions>
+                            </MCard>
+                        </MCol>
+                    </MRow>
+                </MContainer>
+            </div>
+        </MCol>
+    </MRow>
+</MContainer>
+@code {
+    private readonly string _align = "center";
+}

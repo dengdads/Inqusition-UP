@@ -1,0 +1,40 @@
+﻿@page "/dialogs"
+@using Blazored.LocalStorage
+@inject HttpClient Http
+@inject ILocalStorageService localStorage
+
+<MContainer>
+    <MRow Justify=JustifyTypes.SpaceAround>
+        @if (GetUserlogResponse.data != null)
+        {
+
+            @foreach (var record in GetUserlogResponse.data.records)
+            {
+                <MCol>
+                    <MCard MaxHeight="280" MaxWidth="180">
+                        <MImage MaxHeight="150" MaxWidth="180" Src="@record.imageUrl">
+
+                            <MAppBar     
+                            Flat
+                            Color="rgba(0, 0, 0, 0)">
+                                <MToolbarTitle Class="text-h6 black--text pl-0"> @record.title</MToolbarTitle>
+                            </MAppBar>
+
+                            @*<MCardTitle Class="white--text mt-8">
+                                <p class="ml-3">
+                                    @record.account
+                                </p>
+                            </MCardTitle>*@
+
+                        </MImage>
+                            <MCardText Class="text-body-2 px-4" Style="max-height:120px">
+                            <p>
+                                @record.detail
+                            </p>
+                            </MCardText>
+                    </MCard>
+                </MCol>
+            }
+        }
+    </MRow>
+</MContainer>

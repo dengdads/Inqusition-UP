@@ -1,0 +1,53 @@
+﻿@page "/Login"
+@layout EmptyLayout
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+<MCard Width=510 Height=680 Class="mx-auto my-auto">
+    <div style="height:30px;"></div>
+    <div class="mt-2 mx-auto text-center" style="width:420px;">
+        <MAvatar Size=100 Rounded='true'>
+            <MImage Src="https://prts.wiki/images/3/3a/%E5%A4%B4%E5%83%8F_%E7%BC%AA%E5%B0%94%E8%B5%9B%E6%80%9D.png">
+            </MImage>
+        </MAvatar>
+        <h5 class="mt-2 mb-12">伊比利亚之眼 👋</h5>
+
+        <MTextField TValue="string"
+                    Label="Account"
+                    Placeholder="账号"
+                    Outlined
+                    HideDetails="@("auto")"
+                    @bind-Value="@UserLoginData.account">
+        </MTextField>
+        <MTextField TValue="string"
+                    Class="mt-10"
+                    Label="Password"
+                    Type="@(_show ? "text" : "password")"
+                    Placeholder="密码"
+                    AppendIcon="@(_show ? "mdi-eye" : "mdi-eye-off")"
+                    OnAppendClick="()=>_show = !_show"
+                    Outlined
+                    HideDetails="@("auto")"
+                    @bind-Value="@UserLoginData.password">
+        </MTextField>
+        <span class="d-flex justify-end mt-1 text-caption hover-pointer">@*@onclick=@(()=>Navigation.NavigateTo(Navigation.BaseUri+ForgotPasswordRoute))*@
+            忘记密码?
+        </span>
+        <MButton Class="mt-11 rounded-4 text-btn white--text" Height=46 Width=340 Color="primary" @onclick="OnLogin">Login</MButton>
+        <div class="my-6">
+            <span class="text-btn">第一次使用？ &nbsp;</span>
+            <span class="primary--text hover-pointer">创建一个账户</span>@*@onclick="@(()=>Navigation.NavigateTo(Navigation.BaseUri+CreateAccountRoute))"*@
+        </div>
+        <div class="d-flex block-center">
+            <div style="height:0.5px;width:152px;" class="neutral-lighten-5"></div>
+            <span class="text-caption mx-4">或用其他平台账号</span>
+            <div style="height:0.5px;width:152px;" class="neutral-lighten-5"></div>
+        </div>      
+        <div class="mt-4">
+            <MIcon Size=24 Color="neutral-lighten-2" OnClick="()=>{}">fab fa-codepen</MIcon>
+            <MIcon Size=24 Color="neutral-lighten-2" Class="ml-6" OnClick="()=>{}">fab fa-github</MIcon>
+            <MIcon Size=24 Color="neutral-lighten-2" Class="ml-6" OnClick="()=>{}">fab fa-twitter</MIcon>
+            <MIcon Size=24 Color="neutral-lighten-2" Class="ml-6" OnClick="()=>{}">fab fa-instagram</MIcon>
+        </div>
+    </div>
+</MCard>

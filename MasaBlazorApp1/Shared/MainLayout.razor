@@ -1,0 +1,40 @@
+﻿@inherits LayoutComponentBase
+
+<MApp>
+    <MMain Class="fill-lighten-1">
+            <MContainer Fluid>
+                <MErrorHandler>
+                    @Body
+                </MErrorHandler>
+            </MContainer>
+    </MMain>
+    <MBottomNavigation 
+                       Color="teal"
+                              Grow
+                              Shift
+                              Routable>
+        <MButton Href="/overview">
+            <span>概览</span>
+
+            <MIcon>mdi-home-circle</MIcon>
+        </MButton>
+
+        <MButton Href="/dialogs">
+            <span>日志</span>
+
+            <MIcon>mdi-note-text-outline</MIcon>
+        </MButton>
+
+        <MButton Href="/account">
+            <span>账号</span>
+
+            <MIcon>mdi-account-circle</MIcon>
+        </MButton>
+    </MBottomNavigation>
+</MApp>
+
+@code {
+
+    private bool _drawer;
+
+}

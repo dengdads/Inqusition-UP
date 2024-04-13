@@ -1,0 +1,170 @@
+﻿@page "/Account"
+@using Masa.Blazor.Presets
+@using Blazored.LocalStorage
+@inject HttpClient Http
+@inject ILocalStorageService localStorage
+<MCard Class="ml-md-4 d-flex .align-center" Elevation="3">
+    <MCardTitle>
+        <div class="text-h4">
+            功能配置:
+        </div>
+    </MCardTitle>
+    <MCardText>
+    <MRow>
+        <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.task"
+                     Label="作战">
+            </MCheckbox>
+        </MCol>
+        <MCol>
+            <MCheckbox @bind-Value="Info.data.config.daily.credit"
+                     Label="商店">
+            </MCheckbox>
+        </MCol>
+        <MCol>
+            <MCheckbox @bind-Value="Info.data.config.daily.friend"
+                     Label="好友">
+            </MCheckbox>
+        </MCol>
+        <MCol>
+            <MCheckbox @bind-Value="Info.data.config.daily.activity"
+                     Label="活动">
+            </MCheckbox>
+        </MCol>
+        <MCol>
+            <MCheckbox @bind-Value="Info.data.config.daily.mail"
+                     Label="邮箱">
+            </MCheckbox>
+        </MCol>
+    </MRow>
+    </MCardText>
+</MCard>
+<br />
+<MCard Class="ml-md-4 d-flex .align-center" Elevation="3">
+    <MCardTitle>
+        <div class="text-h4">
+            招募配置:
+        </div>
+    </MCardTitle>
+    <MCardText>
+        <MRow>
+            <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.offer.enable"
+                         Label="招募">
+                </MCheckbox>
+            </MCol>
+            <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.offer.car"
+                         Label="小车">
+                </MCheckbox>
+            </MCol>
+            <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.offer.star4"
+                         Label="四星">
+                </MCheckbox>
+            </MCol>
+            <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.offer.star5"
+                         Label="五星">
+                </MCheckbox>
+            </MCol>
+            <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.offer.star6"
+                         Label="六星">
+                </MCheckbox>
+            </MCol>
+            <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.offer.other"
+                         Label="其他">
+                </MCheckbox>
+            </MCol>
+        </MRow>
+    </MCardText>
+</MCard>
+<br />
+<MCard Class="ml-md-4 d-flex .align-center" Elevation="3">
+    <MCardTitle>
+        <div class="text-h4">
+            基建配置:
+        </div>
+    </MCardTitle>
+    <MCardText>
+        <MRow>
+            <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.infrastructure.shift"
+                           Label="排班">
+                </MCheckbox>
+            </MCol>
+            <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.infrastructure.deputy"
+                           Label="副手">
+                </MCheckbox>
+            </MCol>
+            <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.infrastructure.harvest"
+                           Label="收菜">
+                </MCheckbox>
+            </MCol>
+            <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.infrastructure.acceleration"
+                           Label="加速">
+                </MCheckbox>
+            </MCol>
+            <MCol>
+                <MCheckbox @bind-Value="Info.data.config.daily.infrastructure.communication"
+                           Label="线索">
+                </MCheckbox>
+            </MCol>
+        </MRow>
+    </MCardText>
+</MCard>
+<br />
+<MCard Class="ml-md-4" Elevation="3">
+    <MCardTitle>
+        <div class="text-h4">
+            作战配置:
+        </div>
+    </MCardTitle>
+    <MCardText>
+        @foreach (var fight in Info.data.config.daily.fight)
+        {
+            <MRow>
+                <MCol>
+                    @fight.level
+                    <MCascader @bind-Value="fight.level"
+                                Items="_items"
+                                ItemText="u => u.Label"
+                                ItemValue="u => u.Value"
+                                ItemChildren="u => u.Children"
+                                ShowAllLevels="false">
+                    </MCascader>
+                </MCol>
+                <MCol>
+                    <MTextField @bind-Value="fight.num"> </MTextField>
+                </MCol>
+            </MRow>
+        }
+        <div class="d-flex justify-space-around">
+            <MButton Icon @onclick="FightAdd">
+                <MIcon>
+                    mdi-plus-circle
+                </MIcon>
+            </MButton>
+            <div>
+                /
+            </div>
+            <MButton Icon @onclick="FightRemove">
+                <MIcon>
+                    mdi-minus-circle
+                </MIcon>
+            </MButton>
+        </div>
+        <div>
+            @string.Join(",",Info.data.config.daily.fight.Select(item=>item.level))
+        </div>
+    </MCardText>
+</MCard>
+<br />
+<div class="d-flex justify-end">
+    <MButton Color="primary" @onclick="UpdateUserAccount">确认</MButton>
+</div>
